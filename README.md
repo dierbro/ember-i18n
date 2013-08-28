@@ -14,14 +14,17 @@ and set `CLDR.defaultLanguage` to the current locale code (e.g. "de").
 
 Given
 
-    Em.I18n.translations = {
-      'user.edit.title': 'Edit User',
-      'user.followers.title.one': 'One Follower',
-      'user.followers.title.other': 'All {{count}} Followers',
-      'button.add_user.title': 'Add a user',
-      'button.add_user.text': 'Add',
-      'button.add_user.disabled': 'Saving...'
+    var translations ={ 
+      'en': {
+        'user.edit.title': 'Edit User',
+        'user.followers.title.one': 'One Follower',
+        'user.followers.title.other': 'All {{count}} Followers',
+        'button.add_user.title': 'Add a user',
+        'button.add_user.text': 'Add',
+        'button.add_user.disabled': 'Saving...'
+      }
     };
+    Em.I18n.set('translations', $.extend({},translations.en))
 
 #### A simple translation:
 
