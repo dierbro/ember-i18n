@@ -177,9 +177,9 @@
         });
       });
       
-      it('responds to updates on traslations property if bindTranstations is set to true', function() {
+      it('responds to updates on traslations property if bindTranslations is set to true', function() {
         Em.run(function() {
-          Ember.I18n.set('bindTranstations', true);
+          Ember.I18n.set('bindTranslations', true);
         });
         
         render('{{t foo.bar }}');
@@ -193,9 +193,9 @@
         });
       });
       
-      it('doesn\'t responds to updates on traslations property if bindTranstations is not setted', function() {
+      it('doesn\'t responds to updates on traslations property if bindTranslations is not setted', function() {
         Em.run(function() {
-          Ember.I18n.set('bindTranstations', null);
+          Ember.I18n.set('bindTranslations', null);
         });
         
         render('{{t foo.bar }}');
