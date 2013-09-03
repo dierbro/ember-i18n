@@ -1,6 +1,6 @@
 (function () {
 
-  describe('Em.I18n', function () {
+  describe('Em.I18n with observer', function () {
     var view;
 
     function render(template, options) {
@@ -13,9 +13,9 @@
     }
 
     beforeEach(function() {
-      this.originalTranslations = Em.I18n.translations;
+      this.originalTranslations = Em.I18n.get("translations");
 
-      Em.I18n.translations = {
+      Em.I18n.set("translations", {
         'foo.bar': 'A Foobar',
         'foo.bar.named': 'A Foobar named {{name}}',
         'foo.save.disabled': 'Saving Foo...',
@@ -30,14 +30,14 @@
           one: 'A fum',
           other: '{{count}} fums'
         }
-      };
+      });
 
       CLDR.defaultLanguage = 'ksh';
     });
 
     afterEach(function() {
       if (view != null) view.destroy();
-      Em.I18n.translations = this.originalTranslations;
+      Em.I18n.set("translations", this.originalTranslations);
       CLDR.defaultLanguage = null;
     });
 
@@ -174,6 +174,38 @@
 
         Em.run(function() {
           expect(view.$().text()).to.equal('All 4 Bars');
+        });
+      });
+      
+      it('responds to updates on traslations property if bindTranslations is set to true', function() {
+        Em.run(function() {
+          Ember.I18n.set('bindTranslations', true);
+        });
+        
+        render('{{t foo.bar }}');
+
+        Em.run(function() {
+          Ember.I18n.set('translations', {'foo.bar': 'Una Foobar'});
+        });
+
+        Em.run(function() {
+          expect(view.$().text()).to.equal('Una Foobar');
+        });
+      });
+      
+      it('doesn\'t responds to updates on traslations property if bindTranslations is not setted', function() {
+        Em.run(function() {
+          Ember.I18n.set('bindTranslations', null);
+        });
+        
+        render('{{t foo.bar }}');
+
+        Em.run(function() {
+          Ember.I18n.set('translations', {'foo.bar': 'Una Foobar'});
+        });
+
+        Em.run(function() {
+          expect(view.$().text()).to.equal('A Foobar');
         });
       });
 
