@@ -1,6 +1,6 @@
 ## Running the tests
 
-You'll need [npm](https://npmjs.org) and `make`.
+You'll need [npm](https://npmjs.org), [phantomJS](http://phantomjs.org/) and `make`.
 
 ```bash
 make test
